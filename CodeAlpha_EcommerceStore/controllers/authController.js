@@ -102,3 +102,12 @@ exports.login = async (req, res) => {
     // 6. Login successful
     res.send("Login successful!");
 };
+
+exports.logout = (req , res) => {
+    req.session.destroy((err) => {
+        if(err){
+            return res.send("Logout Failed");
+        }
+        res.redirect("/login");
+    })
+}
