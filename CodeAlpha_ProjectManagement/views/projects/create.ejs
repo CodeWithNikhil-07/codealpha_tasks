@@ -1,0 +1,95 @@
+<%- include('../partials/header') %>
+
+<div class="mx-auto max-w-2xl">
+
+    <!-- Back to Dashboard -->
+    <a
+        class="text-sm font-medium text-indigo-600"
+        href="/dashboard"
+    >
+        ← Dashboard
+    </a>
+
+
+    <!-- Page Heading -->
+    <h1 class="mt-4 text-3xl font-bold">
+        Create a project
+    </h1>
+
+
+    <!-- Create Project Form -->
+    <form
+        class="mt-6 space-y-5 rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
+        action="/projects"
+        method="POST"
+    >
+
+        <!-- Project Name -->
+        <label class="block font-medium">
+            Project name
+
+            <input
+                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                type="text"
+                name="name"
+                maxlength="100"
+                required
+            >
+        </label>
+
+
+        <!-- Project Description -->
+        <label class="block font-medium">
+            Description
+
+            <textarea
+                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                name="description"
+                rows="4"
+                maxlength="2000"
+            ></textarea>
+        </label>
+
+
+        <!-- Project Dates -->
+        <div class="grid gap-5 sm:grid-cols-2">
+
+            <!-- Start Date -->
+            <label class="block font-medium">
+                Start date
+
+                <input
+                    class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                    type="date"
+                    name="startDate"
+                >
+            </label>
+
+
+            <!-- Due Date -->
+            <label class="block font-medium">
+                Due date
+
+                <input
+                    class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                    type="date"
+                    name="dueDate"
+                >
+            </label>
+
+        </div>
+
+
+        <!-- Submit Button -->
+        <button
+            type="submit"
+            class="rounded-lg bg-indigo-600 px-4 py-2.5 font-semibold text-white"
+        >
+            Create project
+        </button>
+
+    </form>
+
+</div>
+
+<%- include('../partials/footer') %>
