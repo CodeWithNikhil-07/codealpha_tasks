@@ -1,0 +1,96 @@
+<%- include('../partials/header') %>
+
+<div class="mx-auto mt-10 max-w-md rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
+
+    <!-- Project Name -->
+    <p class="text-sm font-semibold text-indigo-600">
+        FLOWBOARD
+    </p>
+
+    <!-- Page Heading -->
+    <h1 class="mt-2 text-3xl font-bold">
+        Create your account
+    </h1>
+
+    <!-- Description -->
+    <p class="mt-2 text-slate-600">
+        Start organizing your team’s work.
+    </p>
+
+    <!-- Registration Form -->
+    <form
+        class="mt-6 space-y-4"
+        action="/auth/register"
+        method="POST"
+    >
+
+        <!-- Name -->
+        <label class="block font-medium">
+            Name
+
+            <input
+                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                type="text"
+                name="name"
+                maxlength="80"
+                required
+                autocomplete="name"
+            >
+        </label>
+
+        <!-- Email -->
+        <label class="block font-medium">
+            Email
+
+            <input
+                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                type="email"
+                name="email"
+                required
+                autocomplete="email"
+            >
+        </label>
+
+        <!-- Password -->
+        <label class="block font-medium">
+            Password
+
+            <span class="text-sm font-normal text-slate-500">
+                (6+ characters)
+            </span>
+
+            <input
+                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                type="password"
+                name="password"
+                minlength="6"
+                required
+                autocomplete="new-password"
+            >
+        </label>
+
+        <!-- Submit Button -->
+        <button
+            type="submit"
+            class="w-full rounded-lg bg-indigo-600 px-4 py-2.5 font-semibold text-white"
+        >
+            Create account
+        </button>
+
+    </form>
+
+    <!-- Login Link -->
+    <p class="mt-5 text-center text-sm text-slate-600">
+        Already registered?
+
+        <a
+            class="font-semibold text-indigo-600"
+            href="/auth/login"
+        >
+            Sign in
+        </a>
+    </p>
+
+</div>
+
+<%- include('../partials/footer') %>
