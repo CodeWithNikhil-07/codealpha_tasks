@@ -1,0 +1,126 @@
+<%- include('../partials/header') %>
+
+<div class="mx-auto max-w-2xl">
+
+    <!-- Back to Project -->
+    <a
+        class="text-sm font-medium text-indigo-600"
+        href="/projects/<%= project._id %>"
+    >
+        ← Project
+    </a>
+
+
+    <!-- Page Heading -->
+    <h1 class="mt-4 text-3xl font-bold">
+        Edit project
+    </h1>
+
+
+    <!-- Edit Project Form -->
+    <form
+        class="mt-6 space-y-5 rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
+        action="/projects/<%= project._id %>/edit"
+        method="POST"
+    >
+
+        <!-- Project Name -->
+        <label class="block font-medium">
+            Project name
+
+            <input
+                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                type="text"
+                name="name"
+                maxlength="100"
+                value="<%= project.name %>"
+                required
+            >
+        </label>
+
+
+        <!-- Project Description -->
+        <label class="block font-medium">
+            Description
+
+            <textarea
+                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                name="description"
+                rows="4"
+                maxlength="2000"
+            ><%= project.description %></textarea>
+        </label>
+
+
+        <!-- Project Status and Dates -->
+        <div class="grid gap-5 sm:grid-cols-3">
+
+            <!-- Status -->
+            <label class="block font-medium">
+                Status
+
+                <select
+                    class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                    name="status"
+                >
+
+                    <% ['active', 'completed', 'archived'].forEach(status => { %>
+
+                        <option
+                            value="<%= status %>"
+                            <%= project.status === status ? 'selected' : '' %>
+                        >
+                            <%= status %>
+                        </option>
+
+                    <% }) %>
+
+                </select>
+            </label>
+
+
+            <!-- Start Date -->
+            <label class="block font-medium">
+                Start
+
+                <input
+                    class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                    type="date"
+                    name="startDate"
+                    value="<%= project.startDate
+                        ? project.startDate.toISOString().slice(0, 10)
+                        : '' %>"
+                >
+            </label>
+
+
+            <!-- Due Date -->
+            <label class="block font-medium">
+                Due
+
+                <input
+                    class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                    type="date"
+                    name="dueDate"
+                    value="<%= project.dueDate
+                        ? project.dueDate.toISOString().slice(0, 10)
+                        : '' %>"
+                >
+            </label>
+
+        </div>
+
+
+        <!-- Submit Button -->
+        <button
+            type="submit"
+            class="rounded-lg bg-indigo-600 px-4 py-2.5 font-semibold text-white"
+        >
+            Save changes
+        </button>
+
+    </form>
+
+</div>
+
+<%- include('../partials/footer') %>
