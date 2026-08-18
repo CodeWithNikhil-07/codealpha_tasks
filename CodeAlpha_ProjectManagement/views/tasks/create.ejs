@@ -1,0 +1,159 @@
+<%- include('../partials/header') %>
+
+<div class="mx-auto max-w-2xl">
+
+    <!-- Back to Project -->
+    <a
+        class="text-sm font-medium text-indigo-600"
+        href="/projects/<%= project._id %>"
+    >
+        ← <%= project.name %>
+    </a>
+
+
+    <!-- Page Heading -->
+    <h1 class="mt-4 text-3xl font-bold">
+        Create task
+    </h1>
+
+
+    <!-- Create Task Form -->
+    <form
+        class="mt-6 space-y-5 rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
+        action="/projects/<%= project._id %>/tasks"
+        method="POST"
+    >
+
+        <!-- Task Title -->
+        <label class="block font-medium">
+            Title
+
+            <input
+                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                type="text"
+                name="title"
+                maxlength="140"
+                required
+            >
+        </label>
+
+
+        <!-- Task Description -->
+        <label class="block font-medium">
+            Description
+
+            <textarea
+                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                name="description"
+                rows="4"
+                maxlength="2000"
+            ></textarea>
+        </label>
+
+
+        <!-- Task Options -->
+        <div class="grid gap-4 sm:grid-cols-3">
+
+            <!-- Assigned To -->
+            <label class="block font-medium">
+                Assigned to
+
+                <select
+                    class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                    name="assignedTo"
+                >
+
+                    <!-- No Assignment -->
+                    <option value="">
+                        Unassigned
+                    </option>
+
+
+                    <!-- Project Members -->
+                    <% project.members.forEach(member => { %>
+
+                        <option value="<%= member._id %>">
+                            <%= member.name %>
+                        </option>
+
+                    <% }) %>
+
+                </select>
+
+            </label>
+
+
+            <!-- Task Status -->
+            <label class="block font-medium">
+                Status
+
+                <select
+                    class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                    name="status"
+                >
+
+                    <% ['todo', 'in-progress', 'completed'].forEach(status => { %>
+
+                        <option value="<%= status %>">
+                            <%= status %>
+                        </option>
+
+                    <% }) %>
+
+                </select>
+
+            </label>
+
+
+            <!-- Task Priority -->
+            <label class="block font-medium">
+                Priority
+
+                <select
+                    class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                    name="priority"
+                >
+
+                    <% ['low', 'medium', 'high'].forEach(priority => { %>
+
+                        <option
+                            value="<%= priority %>"
+                            <%= priority === 'medium' ? 'selected' : '' %>
+                        >
+                            <%= priority %>
+                        </option>
+
+                    <% }) %>
+
+                </select>
+
+            </label>
+
+        </div>
+
+
+        <!-- Due Date -->
+        <label class="block font-medium">
+            Due date
+
+            <input
+                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                type="date"
+                name="dueDate"
+            >
+        </label>
+
+
+        <!-- Submit Button -->
+        <button
+            type="submit"
+            class="rounded-lg bg-indigo-600 px-4 py-2.5 font-semibold text-white"
+        >
+            Create task
+        </button>
+
+    </form>
+
+</div>
+
+<%- include('../partials/footer') %>

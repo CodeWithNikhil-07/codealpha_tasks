@@ -1,0 +1,172 @@
+<%- include('../partials/header') %>
+
+<div class="mx-auto max-w-2xl">
+
+    <!-- Back to Task -->
+    <a
+        class="text-sm font-medium text-indigo-600"
+        href="/tasks/<%= task._id %>"
+    >
+        ← Task
+    </a>
+
+
+    <!-- Page Heading -->
+    <h1 class="mt-4 text-3xl font-bold">
+        Edit task
+    </h1>
+
+
+    <!-- Edit Task Form -->
+    <form
+        class="mt-6 space-y-5 rounded-xl border border-slate-200 bg-white p-6 shadow-sm"
+        action="/tasks/<%= task._id %>/edit"
+        method="POST"
+    >
+
+        <!-- Task Title -->
+        <label class="block font-medium">
+            Title
+
+            <input
+                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                type="text"
+                name="title"
+                maxlength="140"
+                value="<%= task.title %>"
+                required
+            >
+        </label>
+
+
+        <!-- Task Description -->
+        <label class="block font-medium">
+            Description
+
+            <textarea
+                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                name="description"
+                rows="4"
+                maxlength="2000"
+            ><%= task.description %></textarea>
+        </label>
+
+
+        <!-- Task Options -->
+        <div class="grid gap-4 sm:grid-cols-3">
+
+            <!-- Assigned To -->
+            <label class="block font-medium">
+                Assigned to
+
+                <select
+                    class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                    name="assignedTo"
+                >
+
+                    <!-- Unassigned Option -->
+                    <option value="">
+                        Unassigned
+                    </option>
+
+
+                    <!-- Project Members -->
+                    <% project.members.forEach(member => { %>
+
+                        <option
+                            value="<%= member._id %>"
+                            <%= task.assignedTo &&
+                                task.assignedTo._id.equals(member._id)
+                                ? 'selected'
+                                : '' %>
+                        >
+                            <%= member.name %>
+                        </option>
+
+                    <% }) %>
+
+                </select>
+
+            </label>
+
+
+            <!-- Status -->
+            <label class="block font-medium">
+                Status
+
+                <select
+                    class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                    name="status"
+                >
+
+                    <% ['todo', 'in-progress', 'completed'].forEach(status => { %>
+
+                        <option
+                            value="<%= status %>"
+                            <%= task.status === status ? 'selected' : '' %>
+                        >
+                            <%= status %>
+                        </option>
+
+                    <% }) %>
+
+                </select>
+
+            </label>
+
+
+            <!-- Priority -->
+            <label class="block font-medium">
+                Priority
+
+                <select
+                    class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                    name="priority"
+                >
+
+                    <% ['low', 'medium', 'high'].forEach(priority => { %>
+
+                        <option
+                            value="<%= priority %>"
+                            <%= task.priority === priority ? 'selected' : '' %>
+                        >
+                            <%= priority %>
+                        </option>
+
+                    <% }) %>
+
+                </select>
+
+            </label>
+
+        </div>
+
+
+        <!-- Due Date -->
+        <label class="block font-medium">
+            Due date
+
+            <input
+                class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+                type="date"
+                name="dueDate"
+                value="<%= task.dueDate
+                    ? task.dueDate.toISOString().slice(0, 10)
+                    : '' %>"
+            >
+        </label>
+
+
+        <!-- Submit Button -->
+        <button
+            type="submit"
+            class="rounded-lg bg-indigo-600 px-4 py-2.5 font-semibold text-white"
+        >
+            Save changes
+        </button>
+
+    </form>
+
+</div>
+
+<%- include('../partials/footer') %>
