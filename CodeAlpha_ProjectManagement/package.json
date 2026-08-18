@@ -1,0 +1,31 @@
+{
+  "name": "codealpha_projectmanagementtool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "check": "node --check app.js && node --check controllers/authController.js && node --check controllers/projectController.js && node --check controllers/taskController.js && node --check controllers/commentController.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^6.0.0",
+    "dotenv": "^17.4.2",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "express-ejs-layouts": "^2.5.1",
+    "express-session": "^1.19.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^9.9.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
