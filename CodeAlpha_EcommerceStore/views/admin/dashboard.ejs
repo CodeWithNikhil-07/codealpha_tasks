@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-slate-100 text-slate-800">
+
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+
+    <!-- Admin header -->
+    <div class="mb-8 rounded-2xl bg-slate-900 px-6 py-8 text-white shadow-xl">
+      <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p class="mb-2 text-sm font-medium uppercase tracking-widest text-slate-400">
+            Store Management
+          </p>
+
+          <h1 class="text-3xl font-bold sm:text-4xl">
+            👨‍💼 Admin Dashboard
+          </h1>
+
+          <p class="mt-2 text-slate-400">
+            Manage your products, orders and users.
+          </p>
+        </div>
+
+        <a
+          href="/products"
+          class="inline-block rounded-lg bg-white px-5 py-3 text-center font-semibold text-slate-900 transition hover:bg-slate-200"
+        >
+          View Store →
+        </a>
+      </div>
+    </div>
+
+    <!-- Overview -->
+    <div class="mb-8">
+      <h2 class="mb-5 text-2xl font-bold text-slate-900">
+        Overview
+      </h2>
+
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+        <!-- Products -->
+        <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+          <div class="mb-4 flex items-center justify-between">
+            <p class="text-sm font-medium text-slate-500">
+              Total Products
+            </p>
+
+            <span class="rounded-lg bg-blue-50 px-3 py-2 text-xl">
+              📦
+            </span>
+          </div>
+
+          <h3 class="text-4xl font-bold text-slate-900">
+            <%= productCount %>
+          </h3>
+
+          <p class="mt-2 text-sm text-slate-500">
+            Products available in store
+          </p>
+        </div>
+
+        <!-- Orders -->
+        <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+          <div class="mb-4 flex items-center justify-between">
+            <p class="text-sm font-medium text-slate-500">
+              Total Orders
+            </p>
+
+            <span class="rounded-lg bg-emerald-50 px-3 py-2 text-xl">
+              🛒
+            </span>
+          </div>
+
+          <h3 class="text-4xl font-bold text-slate-900">
+            <%= orderCount %>
+          </h3>
+
+          <p class="mt-2 text-sm text-slate-500">
+            Orders placed by customers
+          </p>
+        </div>
+
+        <!-- Users -->
+        <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+          <div class="mb-4 flex items-center justify-between">
+            <p class="text-sm font-medium text-slate-500">
+              Total Users
+            </p>
+
+            <span class="rounded-lg bg-violet-50 px-3 py-2 text-xl">
+              👥
+            </span>
+          </div>
+
+          <h3 class="text-4xl font-bold text-slate-900">
+            <%= userCount %>
+          </h3>
+
+          <p class="mt-2 text-sm text-slate-500">
+            Registered customers
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Quick actions -->
+    <div class="mb-8 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+      <h2 class="mb-5 text-2xl font-bold text-slate-900">
+        Quick Actions
+      </h2>
+
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+        <!-- Products -->
+        <a
+          href="/products"
+          class="group rounded-xl border border-slate-200 p-5 transition duration-200 hover:-translate-y-1 hover:border-blue-300 hover:bg-blue-50 hover:shadow-md"
+        >
+          <div class="mb-3 text-3xl">
+            🛍️
+          </div>
+
+          <h3 class="font-bold text-slate-900">
+            View Products
+          </h3>
+
+          <p class="mt-1 text-sm text-slate-500">
+            Browse all products in your store.
+          </p>
+
+          <p class="mt-4 font-semibold text-blue-600">
+            Open Products →
+          </p>
+        </a>
+
+        <!-- Orders -->
+        <a
+          href="/admin/orders"
+          class="group rounded-xl border border-slate-200 p-5 transition duration-200 hover:-translate-y-1 hover:border-emerald-300 hover:bg-emerald-50 hover:shadow-md"
+        >
+          <div class="mb-3 text-3xl">
+            📋
+          </div>
+
+          <h3 class="font-bold text-slate-900">
+            Manage Orders
+          </h3>
+
+          <p class="mt-1 text-sm text-slate-500">
+            View and update customer orders.
+          </p>
+
+          <p class="mt-4 font-semibold text-emerald-600">
+            Manage Orders →
+          </p>
+        </a>
+
+        <!-- Manage products -->
+        <a
+          href="/products/admin"
+          class="group rounded-xl border border-slate-200 p-5 transition duration-200 hover:-translate-y-1 hover:border-violet-300 hover:bg-violet-50 hover:shadow-md"
+        >
+          <div class="mb-3 text-3xl">
+            📦
+          </div>
+
+          <h3 class="font-bold text-slate-900">
+            Manage Products
+          </h3>
+
+          <p class="mt-1 text-sm text-slate-500">
+            Add, edit and delete products.
+          </p>
+
+          <p class="mt-4 font-semibold text-violet-600">
+            Manage Products →
+          </p>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Recent orders -->
+    <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200">
+
+      <div class="mb-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900">
+            Recent Orders
+          </h2>
+
+          <p class="mt-1 text-sm text-slate-500">
+            Latest customer orders
+          </p>
+        </div>
+
+        <a
+          href="/admin/orders"
+          class="font-semibold text-blue-600 transition hover:text-blue-800"
+        >
+          View All →
+        </a>
+      </div>
+
+      <!-- Empty state -->
+      <% if (recentOrders.length === 0) { %>
+
+        <div class="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-10 text-center">
+          <div class="mb-3 text-4xl">
+            📭
+          </div>
+
+          <h3 class="font-semibold text-slate-800">
+            No orders yet
+          </h3>
+
+          <p class="mt-1 text-sm text-slate-500">
+            Customer orders will appear here.
+          </p>
+        </div>
+
+      <% } else { %>
+
+        <!-- Orders -->
+        <div class="space-y-4">
+
+          <% recentOrders.forEach(order => { %>
+
+            <div class="rounded-xl border border-slate-200 p-5 transition duration-200 hover:shadow-md">
+
+              <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+
+                <div class="space-y-2">
+                  <p class="font-bold text-slate-900">
+                    Order:
+                    <span class="font-mono text-sm text-slate-600">
+                      <%= order._id %>
+                    </span>
+                  </p>
+
+                  <p class="text-sm text-slate-600">
+                    <strong class="text-slate-800">Customer:</strong>
+                    <%= order.user ? order.user.name : "Unknown" %>
+                  </p>
+
+                  <p class="text-sm text-slate-600">
+                    <strong class="text-slate-800">Total:</strong>
+                    ₹<%= order.totalAmount %>
+                  </p>
+
+                  <p class="text-sm text-slate-600">
+                    <strong class="text-slate-800">Payment:</strong>
+                    <%= order.paymentMethod %>
+                  </p>
+                </div>
+
+                <div class="flex flex-col items-start gap-3 lg:items-end">
+                  <span class="rounded-full bg-slate-100 px-3 py-1 text-sm font-semibold text-slate-700">
+                    <%= order.orderStatus %>
+                  </span>
+
+                  <a
+                    href="/admin/orders"
+                    class="font-semibold text-blue-600 transition hover:text-blue-800"
+                  >
+                    Manage Order →
+                  </a>
+                </div>
+
+              </div>
+            </div>
+
+          <% }) %>
+
+        </div>
+
+      <% } %>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-8 text-center">
+      <a
+        href="/products"
+        class="font-semibold text-slate-600 transition hover:text-slate-900"
+      >
+        ← Back to Store
+      </a>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
