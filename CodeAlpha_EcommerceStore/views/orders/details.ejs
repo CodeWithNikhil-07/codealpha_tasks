@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Order Details | Ecommerce Store</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="min-h-screen bg-slate-100 text-slate-900">
+
+    <!-- HEADER -->
+
+    <header class="bg-slate-950 text-white">
+
+        <div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+
+            <a
+                href="/products"
+                class="text-xl font-black tracking-tight"
+            >
+                ECOMMERCE<span class="text-cyan-400">.</span>
+            </a>
+
+            <div class="flex items-center gap-5 text-sm">
+
+                <a
+                    href="/products"
+                    class="text-slate-400 hover:text-white transition"
+                >
+                    Shop
+                </a>
+
+                <a
+                    href="/orders"
+                    class="text-cyan-400 font-semibold"
+                >
+                    My Orders
+                </a>
+
+                <a
+                    href="/cart"
+                    class="text-slate-400 hover:text-white transition"
+                >
+                    Cart
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="max-w-6xl mx-auto px-6 py-10">
+
+        <!-- PAGE HEADER -->
+
+        <div class="mb-8">
+
+            <a
+                href="/orders"
+                class="text-sm text-cyan-600 hover:text-cyan-800 font-semibold"
+            >
+                ← Back to My Orders
+            </a>
+
+            <div class="mt-5 flex flex-col md:flex-row md:items-end md:justify-between gap-5">
+
+                <div>
+
+                    <p class="text-xs uppercase tracking-[0.2em] text-slate-500 font-bold">
+                        Order Details
+                    </p>
+
+                    <h1 class="text-3xl md:text-4xl font-black mt-2 break-all">
+                        #<%= order._id %>
+                    </h1>
+
+                    <p class="text-slate-500 mt-2">
+                        Placed on
+                        <%= order.createdAt.toLocaleDateString() %>
+                    </p>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div>
+
+                    <span class="inline-flex items-center px-5 py-2.5 rounded-full bg-cyan-100 text-cyan-700 font-bold text-sm">
+                        <%= order.orderStatus %>
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ORDER PROGRESS -->
+
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-7 mb-8">
+
+            <h2 class="text-lg font-bold mb-7">
+                Order Progress
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="flex items-center gap-4">
+
+                    <div class="w-11 h-11 rounded-full bg-cyan-100 text-cyan-700 flex items-center justify-center font-bold">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <p class="font-bold">
+                            Processing
+                        </p>
+
+                        <p class="text-xs text-slate-500">
+                            Order received
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="flex items-center gap-4">
+
+                    <div class="w-11 h-11 rounded-full
+                        <%= ["Shipped", "Delivered"].includes(order.orderStatus)
+                            ? "bg-cyan-100 text-cyan-700"
+                            : "bg-slate-100 text-slate-400" %>
+                        flex items-center justify-center font-bold"
+                    >
+
+                        <%= ["Shipped", "Delivered"].includes(order.orderStatus) ? "✓" : "2" %>
+
+                    </div>
+
+                    <div>
+
+                        <p class="font-bold">
+                            Shipped
+                        </p>
+
+                        <p class="text-xs text-slate-500">
+                            On the way
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="flex items-center gap-4">
+
+                    <div class="w-11 h-11 rounded-full
+                        <%= order.orderStatus === "Delivered"
+                            ? "bg-emerald-100 text-emerald-700"
+                            : "bg-slate-100 text-slate-400" %>
+                        flex items-center justify-center font-bold"
+                    >
+
+                        <%= order.orderStatus === "Delivered" ? "✓" : "3" %>
+
+                    </div>
+
+                    <div>
+
+                        <p class="font-bold">
+                            Delivered
+                        </p>
+
+                        <p class="text-xs text-slate-500">
+                            Package delivered
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+
+            <!-- LEFT CONTENT -->
+
+            <div class="lg:col-span-2 space-y-8">
+
+
+                <!-- ITEMS -->
+
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-7">
+
+                    <h2 class="text-xl font-bold mb-6">
+                        Ordered Items
+                    </h2>
+
+
+                    <div class="space-y-6">
+
+                        <% order.items.forEach(item => { %>
+
+                            <div class="flex items-center justify-between gap-5 pb-6 border-b border-slate-100 last:border-0 last:pb-0">
+
+                                <div>
+
+                                    <h3 class="font-bold text-lg">
+                                        <%= item.name %>
+                                    </h3>
+
+                                    <p class="text-sm text-slate-500 mt-1">
+                                        ₹<%= item.price %>
+                                        ×
+                                        <%= item.quantity %>
+                                    </p>
+
+                                </div>
+
+
+                                <div class="text-right">
+
+                                    <p class="text-xs text-slate-400">
+                                        Item Total
+                                    </p>
+
+                                    <p class="font-bold text-lg">
+                                        ₹<%= item.price * item.quantity %>
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        <% }) %>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SHIPPING ADDRESS -->
+
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-7">
+
+                    <div class="flex items-center justify-between mb-6">
+
+                        <h2 class="text-xl font-bold">
+                            Shipping Address
+                        </h2>
+
+                        <span class="text-2xl">
+                            📍
+                        </span>
+
+                    </div>
+
+
+                    <div class="bg-slate-50 rounded-xl p-5">
+
+                        <p class="font-bold text-lg">
+                            <%= order.shippingAddress.name %>
+                        </p>
+
+                        <p class="text-slate-600 mt-2">
+                            <%= order.shippingAddress.phone %>
+                        </p>
+
+                        <p class="text-slate-600 mt-3">
+                            <%= order.shippingAddress.address %>
+                        </p>
+
+                        <p class="text-slate-600 mt-1">
+                            <%= order.shippingAddress.city %>,
+                            <%= order.shippingAddress.state %>
+                        </p>
+
+                        <p class="text-slate-600 mt-1 font-semibold">
+                            <%= order.shippingAddress.pincode %>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDEBAR -->
+
+            <div class="space-y-8">
+
+
+                <!-- PAYMENT -->
+
+                <div class="bg-slate-950 text-white rounded-2xl shadow-xl p-7">
+
+                    <h2 class="text-xl font-bold mb-6">
+                        Payment Details
+                    </h2>
+
+
+                    <div class="space-y-4">
+
+                        <div class="flex justify-between text-slate-400">
+
+                            <span>
+                                Payment Method
+                            </span>
+
+                            <span class="text-white font-semibold">
+                                <%= order.paymentMethod %>
+                            </span>
+
+                        </div>
+
+
+                        <div class="flex justify-between text-slate-400">
+
+                            <span>
+                                Payment Status
+                            </span>
+
+                            <span class="text-emerald-400 font-semibold">
+                                <%= order.paymentStatus %>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PRICE SUMMARY -->
+
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-7">
+
+                    <h2 class="text-xl font-bold mb-6">
+                        Price Summary
+                    </h2>
+
+
+                    <div class="space-y-4">
+
+                        <div class="flex justify-between text-slate-500">
+
+                            <span>
+                                Subtotal
+                            </span>
+
+                            <span class="text-slate-900 font-semibold">
+                                ₹<%= order.subtotal %>
+                            </span>
+
+                        </div>
+
+
+                        <div class="flex justify-between text-slate-500">
+
+                            <span>
+                                Shipping
+                            </span>
+
+                            <span class="text-emerald-600 font-semibold">
+
+                                <% if (order.shipping === 0) { %>
+
+                                    FREE
+
+                                <% } else { %>
+
+                                    ₹<%= order.shipping %>
+
+                                <% } %>
+
+                            </span>
+
+                        </div>
+
+
+                        <div class="border-t border-slate-200 pt-5 flex justify-between">
+
+                            <span class="text-lg font-bold">
+                                Total
+                            </span>
+
+                            <span class="text-2xl font-black text-cyan-600">
+                                ₹<%= order.totalAmount %>
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="flex flex-col sm:flex-row gap-4 mt-8">
+
+            <a
+                href="/orders"
+                class="px-7 py-3.5 bg-slate-950 text-white rounded-xl font-bold text-center hover:bg-slate-800 transition"
+            >
+                ← My Orders
+            </a>
+
+            <a
+                href="/products"
+                class="px-7 py-3.5 bg-white border border-slate-300 rounded-xl font-bold text-center hover:bg-slate-50 transition"
+            >
+                Continue Shopping
+            </a>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

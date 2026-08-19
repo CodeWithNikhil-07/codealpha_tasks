@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My Orders | Ecommerce Store</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="min-h-screen bg-slate-100 text-slate-900">
+
+    <!-- HEADER -->
+
+    <header class="bg-slate-950 text-white">
+
+        <div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+
+            <a
+                href="/products"
+                class="text-xl font-black tracking-tight"
+            >
+                ECOMMERCE<span class="text-cyan-400">.</span>
+            </a>
+
+            <nav class="flex items-center gap-5 text-sm">
+
+                <a
+                    href="/products"
+                    class="text-slate-400 hover:text-white transition"
+                >
+                    Shop
+                </a>
+
+                <a
+                    href="/orders"
+                    class="text-cyan-400 font-semibold"
+                >
+                    My Orders
+                </a>
+
+                <a
+                    href="/cart"
+                    class="text-slate-400 hover:text-white transition"
+                >
+                    Cart
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="max-w-5xl mx-auto px-6 py-10">
+
+        <!-- PAGE TITLE -->
+
+        <div class="mb-8">
+
+            <p class="text-xs uppercase tracking-[0.2em] text-cyan-600 font-bold">
+                Account
+            </p>
+
+            <h1 class="text-4xl font-black mt-2">
+                My Orders
+            </h1>
+
+            <p class="text-slate-500 mt-2">
+                Track and manage your previous purchases.
+            </p>
+
+        </div>
+
+
+        <% if (orders.length === 0) { %>
+
+
+            <!-- EMPTY ORDERS -->
+
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm px-6 py-16 text-center">
+
+                <div class="text-6xl mb-5">
+                    📦
+                </div>
+
+                <h2 class="text-2xl font-black">
+                    You haven't placed any orders yet.
+                </h2>
+
+                <p class="text-slate-500 mt-3">
+                    Your completed purchases will appear here.
+                </p>
+
+                <a
+                    href="/products"
+                    class="inline-block mt-7 px-7 py-3.5 bg-slate-950 text-white rounded-xl font-bold hover:bg-slate-800 transition"
+                >
+                    Start Shopping
+                </a>
+
+            </div>
+
+
+        <% } else { %>
+
+
+            <!-- ORDER LIST -->
+
+            <div class="space-y-5">
+
+                <% orders.forEach(order => { %>
+
+
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition overflow-hidden">
+
+
+                        <!-- ORDER TOP -->
+
+                        <div class="px-6 py-5 border-b border-slate-100 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+                            <div>
+
+                                <p class="text-xs uppercase tracking-wider text-slate-400 font-bold">
+                                    Order ID
+                                </p>
+
+                                <h2 class="font-black text-lg mt-1 break-all">
+                                    #<%= order._id %>
+                                </h2>
+
+                            </div>
+
+
+                            <div class="text-left md:text-right">
+
+                                <p class="text-xs text-slate-400">
+                                    Order Date
+                                </p>
+
+                                <p class="font-semibold mt-1">
+                                    <%= order.createdAt.toLocaleDateString() %>
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ORDER BODY -->
+
+                        <div class="px-6 py-6">
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+
+                                <!-- TOTAL -->
+
+                                <div>
+
+                                    <p class="text-xs uppercase tracking-wider text-slate-400 font-bold">
+                                        Total
+                                    </p>
+
+                                    <p class="text-xl font-black mt-1">
+                                        ₹<%= order.totalAmount %>
+                                    </p>
+
+                                </div>
+
+
+                                <!-- PAYMENT -->
+
+                                <div>
+
+                                    <p class="text-xs uppercase tracking-wider text-slate-400 font-bold">
+                                        Payment
+                                    </p>
+
+                                    <p class="font-semibold mt-1">
+                                        <%= order.paymentMethod %>
+                                    </p>
+
+                                </div>
+
+
+                                <!-- PAYMENT STATUS -->
+
+                                <div>
+
+                                    <p class="text-xs uppercase tracking-wider text-slate-400 font-bold">
+                                        Payment Status
+                                    </p>
+
+                                    <span class="inline-flex mt-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">
+                                        <%= order.paymentStatus %>
+                                    </span>
+
+                                </div>
+
+
+                                <!-- ORDER STATUS -->
+
+                                <div>
+
+                                    <p class="text-xs uppercase tracking-wider text-slate-400 font-bold">
+                                        Order Status
+                                    </p>
+
+
+                                    <% if (order.orderStatus === "Delivered") { %>
+
+                                        <span class="inline-flex mt-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">
+                                            ✓ Delivered
+                                        </span>
+
+                                    <% } else if (order.orderStatus === "Shipped") { %>
+
+                                        <span class="inline-flex mt-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold">
+                                            🚚 Shipped
+                                        </span>
+
+                                    <% } else if (order.orderStatus === "Cancelled") { %>
+
+                                        <span class="inline-flex mt-2 px-3 py-1 rounded-full bg-red-100 text-red-700 text-xs font-bold">
+                                            ✕ Cancelled
+                                        </span>
+
+                                    <% } else { %>
+
+                                        <span class="inline-flex mt-2 px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-bold">
+                                            ⏳ Processing
+                                        </span>
+
+                                    <% } %>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- ACTION -->
+
+                            <div class="mt-6 pt-5 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+
+                                <p class="text-sm text-slate-500">
+                                    Need more information about this order?
+                                </p>
+
+                                <a
+                                    href="/orders/<%= order._id %>"
+                                    class="inline-flex items-center justify-center px-6 py-3 bg-cyan-500 text-white rounded-xl font-bold hover:bg-cyan-600 transition"
+                                >
+                                    View Order Details →
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                <% }) %>
+
+            </div>
+
+
+        <% } %>
+
+
+        <!-- FOOTER ACTION -->
+
+        <div class="mt-8">
+
+            <a
+                href="/products"
+                class="inline-flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-cyan-600 transition"
+            >
+                ← Continue Shopping
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="mt-16 border-t border-slate-200">
+
+        <div class="max-w-6xl mx-auto px-6 py-8 text-center">
+
+            <p class="text-sm text-slate-400">
+                © 2026 Ecommerce Store. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
