@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login | Ecommerce Store</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+
+    <!-- LOGIN CARD -->
+
+    <div class="w-full max-w-md">
+
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+
+            <!-- TITLE -->
+
+            <div class="text-center mb-8">
+
+                <div class="text-4xl mb-3">
+                    🛒
+                </div>
+
+                <h1 class="text-3xl font-bold text-gray-900">
+                    Welcome Back
+                </h1>
+
+                <p class="text-gray-500 mt-2">
+                    Login to your Ecommerce Store account
+                </p>
+
+            </div>
+
+
+            <!-- SUCCESS MESSAGE -->
+
+            <% if (successMessage && successMessage.length > 0) { %>
+
+                <div class="mb-6 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
+
+                    <%= successMessage[0] %>
+
+                </div>
+
+            <% } %>
+
+
+            <!-- LOGIN FORM -->
+
+            <form
+                action="/login"
+                method="POST"
+                class="space-y-5"
+            >
+
+                <!-- EMAIL -->
+
+                <div>
+
+                    <label
+                        for="email"
+                        class="block text-sm font-semibold text-gray-700 mb-2"
+                    >
+                        Email
+                    </label>
+
+                    <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div>
+
+                    <label
+                        for="password"
+                        class="block text-sm font-semibold text-gray-700 mb-2"
+                    >
+                        Password
+                    </label>
+
+                    <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                        class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent"
+                    >
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="w-full bg-gray-900 text-white py-3 rounded-lg font-semibold hover:bg-gray-700 transition"
+                >
+                    Login
+                </button>
+
+            </form>
+
+
+            <!-- REGISTER LINK -->
+
+            <div class="text-center mt-6">
+
+                <p class="text-gray-600">
+
+                    Don't have an account?
+
+                    <a
+                        href="/register"
+                        class="text-gray-900 font-semibold hover:underline"
+                    >
+                        Register
+                    </a>
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- BACK TO STORE -->
+
+        <div class="text-center mt-5">
+
+            <a
+                href="/products"
+                class="text-gray-500 hover:text-gray-900 text-sm"
+            >
+                ← Back to Store
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

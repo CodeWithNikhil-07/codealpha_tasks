@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Create Account | Ecommerce Store</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-indigo-800 flex items-center justify-center px-4 py-10">
+
+    <!-- REGISTER CONTAINER -->
+
+    <div class="w-full max-w-5xl">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 bg-white rounded-3xl overflow-hidden shadow-2xl">
+
+
+            <!-- LEFT BRAND SECTION -->
+
+            <div class="hidden md:flex bg-gradient-to-br from-indigo-600 to-purple-700 text-white p-12 flex-col justify-between">
+
+                <div>
+
+                    <div class="text-5xl mb-6">
+                        ✨
+                    </div>
+
+                    <h1 class="text-4xl font-bold leading-tight">
+                        Start Your
+                        <br>
+                        Shopping Journey
+                    </h1>
+
+                    <p class="mt-6 text-indigo-100 leading-relaxed">
+                        Create your account and discover products
+                        selected just for you.
+                    </p>
+
+                </div>
+
+
+                <div class="space-y-3 text-indigo-100 text-sm">
+
+                    <p>
+                        ✓ Easy and secure shopping
+                    </p>
+
+                    <p>
+                        ✓ Track your orders
+                    </p>
+
+                    <p>
+                        ✓ Manage your profile
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- REGISTER FORM SECTION -->
+
+            <div class="p-8 sm:p-12">
+
+                <!-- MOBILE LOGO -->
+
+                <div class="md:hidden text-center mb-8">
+
+                    <div class="text-4xl mb-3">
+                        ✨
+                    </div>
+
+                    <h1 class="text-2xl font-bold text-gray-900">
+                        Ecommerce Store
+                    </h1>
+
+                </div>
+
+
+                <!-- HEADING -->
+
+                <div class="mb-8">
+
+                    <p class="text-indigo-600 font-semibold text-sm uppercase tracking-wider">
+                        Join Us
+                    </p>
+
+                    <h2 class="text-3xl font-bold text-gray-900 mt-2">
+                        Create Account
+                    </h2>
+
+                    <p class="text-gray-500 mt-2">
+                        Fill in your details to get started.
+                    </p>
+
+                </div>
+
+
+                <!-- REGISTER FORM -->
+
+                <form
+                    action="/register"
+                    method="POST"
+                    class="space-y-5"
+                >
+
+                    <!-- NAME -->
+
+                    <div>
+
+                        <label
+                            for="name"
+                            class="block text-sm font-semibold text-gray-700 mb-2"
+                        >
+                            Full Name
+                        </label>
+
+                        <input
+                            id="name"
+                            type="text"
+                            placeholder="Enter your name"
+                            name="name"
+                            required
+                            class="w-full border-0 border-b-2 border-gray-200 px-1 py-3 bg-transparent focus:outline-none focus:border-indigo-600 transition"
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div>
+
+                        <label
+                            for="email"
+                            class="block text-sm font-semibold text-gray-700 mb-2"
+                        >
+                            Email Address
+                        </label>
+
+                        <input
+                            id="email"
+                            type="email"
+                            placeholder="you@example.com"
+                            name="email"
+                            required
+                            class="w-full border-0 border-b-2 border-gray-200 px-1 py-3 bg-transparent focus:outline-none focus:border-indigo-600 transition"
+                        >
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div>
+
+                        <label
+                            for="password"
+                            class="block text-sm font-semibold text-gray-700 mb-2"
+                        >
+                            Password
+                        </label>
+
+                        <input
+                            id="password"
+                            type="password"
+                            placeholder="Create a password"
+                            name="password"
+                            required
+                            minlength="8"
+                            class="w-full border-0 border-b-2 border-gray-200 px-1 py-3 bg-transparent focus:outline-none focus:border-indigo-600 transition"
+                        >
+
+                        <p class="text-xs text-gray-400 mt-2">
+                            Password must contain at least 8 characters.
+                        </p>
+
+                    </div>
+
+
+                    <!-- REGISTER BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="w-full mt-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3.5 rounded-xl font-semibold shadow-lg shadow-indigo-200 hover:from-indigo-700 hover:to-purple-700 hover:shadow-xl transition duration-300"
+                    >
+                        Create My Account
+                    </button>
+
+                </form>
+
+
+                <!-- LOGIN -->
+
+                <div class="text-center mt-7">
+
+                    <p class="text-gray-500">
+
+                        Already have an account?
+
+                        <a
+                            href="/login"
+                            class="text-indigo-600 font-semibold hover:text-indigo-800 hover:underline"
+                        >
+                            Login
+                        </a>
+
+                    </p>
+
+                </div>
+
+
+                <!-- STORE LINK -->
+
+                <div class="text-center mt-5">
+
+                    <a
+                        href="/products"
+                        class="text-sm text-gray-400 hover:text-gray-700 transition"
+                    >
+                        ← Back to Store
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
