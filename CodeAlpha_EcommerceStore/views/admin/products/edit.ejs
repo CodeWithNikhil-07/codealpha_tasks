@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Edit Product</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+
+<body class="min-h-screen bg-slate-100 text-slate-800">
+
+
+  <div class="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
+
+
+    <!-- HEADER -->
+
+    <div class="mb-8 rounded-2xl bg-slate-900 px-6 py-8 text-white shadow-xl">
+
+      <p class="mb-2 text-sm font-medium uppercase tracking-widest text-slate-400">
+        Store Management
+      </p>
+
+      <h1 class="text-3xl font-bold sm:text-4xl">
+        ✏️ Edit Product
+      </h1>
+
+      <p class="mt-2 text-slate-400">
+        Update the information of this product.
+      </p>
+
+    </div>
+
+
+    <!-- EDIT FORM -->
+
+    <div class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200 sm:p-8">
+
+
+      <form
+        action="/products/admin/<%= product._id %>?_method=PUT"
+        method="POST"
+        class="space-y-6"
+      >
+
+
+        <!-- PRODUCT NAME -->
+
+        <div>
+
+          <label
+            for="name"
+            class="mb-2 block text-sm font-semibold text-slate-700"
+          >
+            Product Name
+          </label>
+
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value="<%= product.name %>"
+            required
+            class="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+          >
+
+        </div>
+
+
+        <!-- DESCRIPTION -->
+
+        <div>
+
+          <label
+            for="description"
+            class="mb-2 block text-sm font-semibold text-slate-700"
+          >
+            Description
+          </label>
+
+          <textarea
+            id="description"
+            name="description"
+            rows="5"
+            required
+            class="w-full resize-y rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+          ><%= product.description %></textarea>
+
+        </div>
+
+
+        <!-- PRICE + STOCK -->
+
+        <div class="grid gap-6 sm:grid-cols-2">
+
+
+          <!-- PRICE -->
+
+          <div>
+
+            <label
+              for="price"
+              class="mb-2 block text-sm font-semibold text-slate-700"
+            >
+              Price (₹)
+            </label>
+
+            <input
+              type="number"
+              id="price"
+              name="price"
+              value="<%= product.price %>"
+              min="0"
+              step="0.01"
+              required
+              class="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            >
+
+          </div>
+
+
+          <!-- STOCK -->
+
+          <div>
+
+            <label
+              for="stock"
+              class="mb-2 block text-sm font-semibold text-slate-700"
+            >
+              Stock
+            </label>
+
+            <input
+              type="number"
+              id="stock"
+              name="stock"
+              value="<%= product.stock %>"
+              min="0"
+              required
+              class="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            >
+
+          </div>
+
+
+        </div>
+
+
+        <!-- CATEGORY -->
+
+        <div>
+
+          <label
+            for="category"
+            class="mb-2 block text-sm font-semibold text-slate-700"
+          >
+            Category
+          </label>
+
+          <input
+            type="text"
+            id="category"
+            name="category"
+            value="<%= product.category %>"
+            required
+            class="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+          >
+
+        </div>
+
+
+        <!-- IMAGE URL -->
+
+        <div>
+
+          <label
+            for="imageUrl"
+            class="mb-2 block text-sm font-semibold text-slate-700"
+          >
+            Image URL
+          </label>
+
+          <input
+            type="text"
+            id="imageUrl"
+            name="imageUrl"
+            value="<%= product.imageUrl || '' %>"
+            placeholder="https://example.com/image.jpg"
+            class="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+          >
+
+          <p class="mt-2 text-sm text-slate-500">
+            Enter the URL of the product image.
+          </p>
+
+        </div>
+
+
+        <!-- CURRENT IMAGE -->
+
+        <% if (product.imageUrl) { %>
+
+          <div>
+
+            <p class="mb-2 text-sm font-semibold text-slate-700">
+              Current Image
+            </p>
+
+            <img
+              src="<%= product.imageUrl %>"
+              alt="<%= product.name %>"
+              class="h-40 w-40 rounded-xl object-cover ring-1 ring-slate-200"
+            >
+
+          </div>
+
+        <% } %>
+
+
+        <!-- BUTTONS -->
+
+        <div class="flex flex-col gap-3 border-t border-slate-200 pt-6 sm:flex-row">
+
+
+          <button
+            type="submit"
+            class="flex-1 rounded-lg bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700"
+          >
+            ✓ Update Product
+          </button>
+
+
+          <a
+            href="/products/admin"
+            class="flex-1 rounded-lg bg-slate-100 px-5 py-3 text-center font-semibold text-slate-700 transition hover:bg-slate-200"
+          >
+            Cancel
+          </a>
+
+
+        </div>
+
+
+      </form>
+
+
+    </div>
+
+
+    <!-- BACK -->
+
+    <div class="mt-6 text-center">
+
+      <a
+        href="/products/admin"
+        class="font-semibold text-slate-600 transition hover:text-slate-900"
+      >
+        ← Back to Products
+      </a>
+
+    </div>
+
+
+  </div>
+
+
+</body>
+
+</html>

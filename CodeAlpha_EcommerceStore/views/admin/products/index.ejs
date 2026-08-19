@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Manage Products</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+
+<body class="min-h-screen bg-slate-100 text-slate-800">
+
+
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+
+
+    <!-- HEADER -->
+
+    <div class="mb-8 rounded-2xl bg-slate-900 px-6 py-8 text-white shadow-xl">
+
+      <div class="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+
+        <div>
+
+          <p class="mb-2 text-sm font-medium uppercase tracking-widest text-slate-400">
+            Store Management
+          </p>
+
+          <h1 class="text-3xl font-bold sm:text-4xl">
+            📦 Manage Products
+          </h1>
+
+          <p class="mt-2 text-slate-400">
+            Add, edit and manage all products in your store.
+          </p>
+
+        </div>
+
+
+        <!-- ADD PRODUCT -->
+
+        <a
+          href="/products/admin/new"
+          class="inline-flex items-center justify-center rounded-lg bg-white px-5 py-3 font-semibold text-slate-900 transition hover:bg-slate-200"
+        >
+          + Add Product
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <div class="mb-8 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-slate-200">
+
+      <div class="flex flex-wrap gap-3">
+
+        <a
+          href="/admin"
+          class="rounded-lg bg-slate-900 px-4 py-2 font-semibold text-white transition hover:bg-slate-700"
+        >
+          Dashboard
+        </a>
+
+
+        <a
+          href="/admin/orders"
+          class="rounded-lg bg-slate-100 px-4 py-2 font-semibold text-slate-700 transition hover:bg-slate-200"
+        >
+          Manage Orders
+        </a>
+
+
+        <a
+          href="/products"
+          class="rounded-lg bg-slate-100 px-4 py-2 font-semibold text-slate-700 transition hover:bg-slate-200"
+        >
+          View Store
+        </a>
+
+
+        <a
+          href="/logout"
+          class="rounded-lg bg-red-50 px-4 py-2 font-semibold text-red-600 transition hover:bg-red-100"
+        >
+          Logout
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <!-- PRODUCT LIST CARD -->
+
+    <div class="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-slate-200">
+
+
+      <!-- CARD HEADER -->
+
+      <div class="border-b border-slate-200 px-6 py-5">
+
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+
+          <div>
+
+            <h2 class="text-2xl font-bold text-slate-900">
+              All Products
+            </h2>
+
+            <p class="mt-1 text-sm text-slate-500">
+              Manage your store inventory.
+            </p>
+
+          </div>
+
+
+          <div class="rounded-lg bg-slate-100 px-4 py-2">
+
+            <span class="text-sm font-medium text-slate-500">
+              Total:
+            </span>
+
+            <span class="font-bold text-slate-900">
+              <%= products.length %>
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- NO PRODUCTS -->
+
+      <% if (products.length === 0) { %>
+
+
+        <div class="px-6 py-16 text-center">
+
+          <div class="mb-4 text-5xl">
+            📦
+          </div>
+
+          <h3 class="text-xl font-bold text-slate-900">
+            No products available
+          </h3>
+
+          <p class="mt-2 text-slate-500">
+            Start adding products to your store.
+          </p>
+
+
+          <a
+            href="/products/admin/new"
+            class="mt-6 inline-block rounded-lg bg-slate-900 px-5 py-3 font-semibold text-white transition hover:bg-slate-700"
+          >
+            + Add First Product
+          </a>
+
+        </div>
+
+
+      <% } else { %>
+
+
+        <!-- DESKTOP TABLE -->
+
+        <div class="hidden overflow-x-auto md:block">
+
+          <table class="w-full text-left">
+
+            <thead class="bg-slate-50">
+
+              <tr>
+
+                <th class="px-6 py-4 text-sm font-semibold text-slate-600">
+                  Product
+                </th>
+
+                <th class="px-6 py-4 text-sm font-semibold text-slate-600">
+                  Category
+                </th>
+
+                <th class="px-6 py-4 text-sm font-semibold text-slate-600">
+                  Price
+                </th>
+
+                <th class="px-6 py-4 text-sm font-semibold text-slate-600">
+                  Stock
+                </th>
+
+                <th class="px-6 py-4 text-right text-sm font-semibold text-slate-600">
+                  Actions
+                </th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody class="divide-y divide-slate-200">
+
+
+              <% products.forEach(product => { %>
+
+
+                <tr class="transition hover:bg-slate-50">
+
+
+                  <!-- PRODUCT -->
+
+                  <td class="px-6 py-5">
+
+                    <div class="flex items-center gap-4">
+
+
+                      <% if (product.imageUrl) { %>
+
+                        <img
+                          src="<%= product.imageUrl %>"
+                          alt="<%= product.name %>"
+                          class="h-14 w-14 rounded-lg object-cover ring-1 ring-slate-200"
+                        >
+
+                      <% } else { %>
+
+                        <div class="flex h-14 w-14 items-center justify-center rounded-lg bg-slate-100 text-2xl">
+                          📦
+                        </div>
+
+                      <% } %>
+
+
+                      <div>
+
+                        <p class="font-semibold text-slate-900">
+                          <%= product.name %>
+                        </p>
+
+                        <p class="mt-1 max-w-xs truncate text-sm text-slate-500">
+                          <%= product.description || "No description" %>
+                        </p>
+
+                      </div>
+
+                    </div>
+
+                  </td>
+
+
+                  <!-- CATEGORY -->
+
+                  <td class="px-6 py-5">
+
+                    <span class="rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-700">
+                      <%= product.category %>
+                    </span>
+
+                  </td>
+
+
+                  <!-- PRICE -->
+
+                  <td class="px-6 py-5">
+
+                    <span class="font-bold text-slate-900">
+                      ₹<%= product.price %>
+                    </span>
+
+                  </td>
+
+
+                  <!-- STOCK -->
+
+                  <td class="px-6 py-5">
+
+
+                    <% if (product.stock > 10) { %>
+
+                      <span class="rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-700">
+                        <%= product.stock %> in stock
+                      </span>
+
+
+                    <% } else if (product.stock > 0) { %>
+
+                      <span class="rounded-full bg-amber-50 px-3 py-1 text-sm font-semibold text-amber-700">
+                        Low: <%= product.stock %>
+                      </span>
+
+
+                    <% } else { %>
+
+                      <span class="rounded-full bg-red-50 px-3 py-1 text-sm font-semibold text-red-700">
+                        Out of stock
+                      </span>
+
+                    <% } %>
+
+
+                  </td>
+
+
+                  <!-- ACTIONS -->
+
+                  <td class="px-6 py-5">
+
+                    <div class="flex justify-end gap-2">
+
+
+                      <!-- EDIT -->
+
+                      <a
+                        href="/products/admin/<%= product._id %>/edit"
+                        class="rounded-lg bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 transition hover:bg-blue-100"
+                      >
+                        Edit
+                      </a>
+
+
+                      <!-- DELETE -->
+
+                      <form
+                        action="/products/admin/<%= product._id %>?_method=DELETE"
+                        method="POST"
+                      >
+
+                        <button
+                          type="submit"
+                          onclick="return confirm('Are you sure you want to delete this product?')"
+                          class="rounded-lg bg-red-50 px-4 py-2 text-sm font-semibold text-red-600 transition hover:bg-red-100"
+                        >
+                          Delete
+                        </button>
+
+                      </form>
+
+
+                    </div>
+
+                  </td>
+
+
+                </tr>
+
+
+              <% }) %>
+
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+
+        <!-- MOBILE CARDS -->
+
+        <div class="space-y-4 p-4 md:hidden">
+
+
+          <% products.forEach(product => { %>
+
+
+            <div class="rounded-xl border border-slate-200 p-4">
+
+
+              <div class="flex gap-4">
+
+
+                <!-- IMAGE -->
+
+                <% if (product.imageUrl) { %>
+
+                  <img
+                    src="<%= product.imageUrl %>"
+                    alt="<%= product.name %>"
+                    class="h-20 w-20 rounded-lg object-cover"
+                  >
+
+                <% } else { %>
+
+                  <div class="flex h-20 w-20 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-3xl">
+                    📦
+                  </div>
+
+                <% } %>
+
+
+                <!-- DETAILS -->
+
+                <div class="min-w-0 flex-1">
+
+                  <h3 class="font-bold text-slate-900">
+                    <%= product.name %>
+                  </h3>
+
+                  <p class="mt-1 text-sm text-slate-500">
+                    <%= product.category %>
+                  </p>
+
+                  <p class="mt-2 font-bold text-slate-900">
+                    ₹<%= product.price %>
+                  </p>
+
+                  <p class="mt-1 text-sm text-slate-500">
+                    Stock: <%= product.stock %>
+                  </p>
+
+                </div>
+
+
+              </div>
+
+
+              <!-- MOBILE ACTIONS -->
+
+              <div class="mt-4 flex gap-2 border-t border-slate-200 pt-4">
+
+
+                <a
+                  href="/products/admin/<%= product._id %>/edit"
+                  class="flex-1 rounded-lg bg-blue-50 px-4 py-2 text-center text-sm font-semibold text-blue-600 transition hover:bg-blue-100"
+                >
+                  Edit
+                </a>
+
+
+                <form
+                  action="/products/admin/<%= product._id %>?_method=DELETE"
+                  method="POST"
+                  class="flex-1"
+                >
+
+                  <button
+                    type="submit"
+                    onclick="return confirm('Are you sure you want to delete this product?')"
+                    class="w-full rounded-lg bg-red-50 px-4 py-2 text-sm font-semibold text-red-600 transition hover:bg-red-100"
+                  >
+                    Delete
+                  </button>
+
+                </form>
+
+
+              </div>
+
+
+            </div>
+
+
+          <% }) %>
+
+
+        </div>
+
+
+      <% } %>
+
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="mt-8 text-center">
+
+      <a
+        href="/admin"
+        class="font-semibold text-slate-600 transition hover:text-slate-900"
+      >
+        ← Back to Admin Dashboard
+      </a>
+
+    </div>
+
+
+  </div>
+
+
+</body>
+
+</html>
