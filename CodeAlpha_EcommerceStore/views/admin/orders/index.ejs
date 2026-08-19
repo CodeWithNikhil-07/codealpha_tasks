@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Orders | Ecommerce Store</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="min-h-screen bg-slate-950 text-slate-900">
+
+    <!-- ADMIN HEADER -->
+
+    <header class="bg-slate-900 border-b border-slate-800 text-white">
+
+        <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+            <div>
+
+                <p class="text-xs uppercase tracking-[0.25em] text-amber-400 font-bold">
+                    Admin Panel
+                </p>
+
+                <h1 class="text-2xl font-black mt-1">
+                    Order Management
+                </h1>
+
+            </div>
+
+
+            <nav class="flex items-center gap-5 text-sm">
+
+                <a
+                    href="/admin"
+                    class="text-slate-400 hover:text-white transition"
+                >
+                    Dashboard
+                </a>
+
+                <a
+                    href="/products/admin/all"
+                    class="text-slate-400 hover:text-white transition"
+                >
+                    Products
+                </a>
+
+                <a
+                    href="/admin/orders"
+                    class="text-amber-400 font-bold"
+                >
+                    Orders
+                </a>
+
+                <form
+                    action="/logout"
+                    method="POST"
+                    class="inline"
+                >
+
+                    <button
+                        type="submit"
+                        class="text-slate-400 hover:text-red-400 transition"
+                    >
+                        Logout
+                    </button>
+
+                </form>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="max-w-7xl mx-auto px-6 py-10">
+
+
+        <!-- PAGE INTRO -->
+
+        <div class="mb-8">
+
+            <p class="text-xs uppercase tracking-[0.2em] text-amber-500 font-bold">
+                Store Operations
+            </p>
+
+            <h2 class="text-4xl font-black text-white mt-2">
+                All Orders
+            </h2>
+
+            <p class="text-slate-400 mt-2">
+                Review customer orders and manage their delivery status.
+            </p>
+
+        </div>
+
+
+        <% if (orders.length === 0) { %>
+
+
+            <!-- EMPTY STATE -->
+
+            <div class="bg-white rounded-2xl p-12 text-center shadow-xl">
+
+                <div class="text-5xl mb-4">
+                    📦
+                </div>
+
+                <h2 class="text-2xl font-black">
+                    No orders found.
+                </h2>
+
+                <p class="text-slate-500 mt-2">
+                    Customer orders will appear here once they are placed.
+                </p>
+
+                <a
+                    href="/admin"
+                    class="inline-block mt-6 px-6 py-3 bg-slate-900 text-white rounded-xl font-bold hover:bg-slate-700 transition"
+                >
+                    Back to Dashboard
+                </a>
+
+            </div>
+
+
+        <% } else { %>
+
+
+            <!-- ORDER COUNT -->
+
+            <div class="mb-5">
+
+                <span class="inline-flex items-center px-4 py-2 rounded-lg bg-slate-800 text-slate-300 text-sm font-semibold border border-slate-700">
+
+                    Total Orders:
+                    <span class="text-amber-400 ml-2">
+                        <%= orders.length %>
+                    </span>
+
+                </span>
+
+            </div>
+
+
+            <!-- ORDERS -->
+
+            <div class="space-y-5">
+
+                <% orders.forEach(order => { %>
+
+
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+
+
+                        <!-- ORDER HEADER -->
+
+                        <div class="bg-slate-100 px-6 py-5 border-b border-slate-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+
+                            <div>
+
+                                <p class="text-xs uppercase tracking-wider text-slate-400 font-bold">
+                                    Order ID
+                                </p>
+
+                                <h3 class="text-lg font-black mt-1 break-all">
+                                    #<%= order._id %>
+                                </h3>
+
+                            </div>
+
+
+                            <div class="text-left lg:text-right">
+
+                                <p class="text-xs text-slate-400">
+                                    Placed On
+                                </p>
+
+                                <p class="font-semibold mt-1">
+                                    <%= order.createdAt.toLocaleDateString() %>
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ORDER INFORMATION -->
+
+                        <div class="p-6">
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+
+
+                                <!-- CUSTOMER -->
+
+                                <div>
+
+                                    <p class="text-xs uppercase tracking-wider text-slate-400 font-bold">
+                                        Customer
+                                    </p>
+
+                                    <p class="font-bold mt-2">
+                                        <%= order.user ? order.user.name : "Unknown" %>
+                                    </p>
+
+                                    <p class="text-sm text-slate-500 mt-1 break-all">
+                                        <%= order.user ? order.user.email : "Unknown" %>
+                                    </p>
+
+                                </div>
+
+
+                                <!-- TOTAL -->
+
+                                <div>
+
+                                    <p class="text-xs uppercase tracking-wider text-slate-400 font-bold">
+                                        Total
+                                    </p>
+
+                                    <p class="text-xl font-black mt-2">
+                                        ₹<%= order.totalAmount %>
+                                    </p>
+
+                                </div>
+
+
+                                <!-- PAYMENT -->
+
+                                <div>
+
+                                    <p class="text-xs uppercase tracking-wider text-slate-400 font-bold">
+                                        Payment
+                                    </p>
+
+                                    <p class="font-semibold mt-2">
+                                        <%= order.paymentMethod %>
+                                    </p>
+
+                                </div>
+
+
+                                <!-- PAYMENT STATUS -->
+
+                                <div>
+
+                                    <p class="text-xs uppercase tracking-wider text-slate-400 font-bold">
+                                        Payment Status
+                                    </p>
+
+                                    <span class="inline-flex mt-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">
+                                        <%= order.paymentStatus %>
+                                    </span>
+
+                                </div>
+
+
+                                <!-- ORDER STATUS -->
+
+                                <div>
+
+                                    <p class="text-xs uppercase tracking-wider text-slate-400 font-bold">
+                                        Current Status
+                                    </p>
+
+
+                                    <% if (order.orderStatus === "Delivered") { %>
+
+                                        <span class="inline-flex mt-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">
+                                            ✓ Delivered
+                                        </span>
+
+                                    <% } else if (order.orderStatus === "Shipped") { %>
+
+                                        <span class="inline-flex mt-2 px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold">
+                                            🚚 Shipped
+                                        </span>
+
+                                    <% } else if (order.orderStatus === "Cancelled") { %>
+
+                                        <span class="inline-flex mt-2 px-3 py-1 rounded-full bg-red-100 text-red-700 text-xs font-bold">
+                                            ✕ Cancelled
+                                        </span>
+
+                                    <% } else { %>
+
+                                        <span class="inline-flex mt-2 px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-bold">
+                                            ⏳ Processing
+                                        </span>
+
+                                    <% } %>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- STATUS UPDATE -->
+
+                            <div class="mt-7 pt-6 border-t border-slate-200">
+
+                                <form
+                                    action="/admin/orders/<%= order._id %>/status"
+                                    method="POST"
+                                    class="flex flex-col md:flex-row md:items-end gap-4"
+                                >
+
+                                    <div class="flex-1">
+
+                                        <label
+                                            for="status-<%= order._id %>"
+                                            class="block text-sm font-bold mb-2"
+                                        >
+                                            Change Order Status
+                                        </label>
+
+                                        <select
+                                            name="status"
+                                            id="status-<%= order._id %>"
+                                            class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                                        >
+
+                                            <option
+                                                value="Processing"
+                                                <%= order.orderStatus === "Processing" ? "selected" : "" %>
+                                            >
+                                                Processing
+                                            </option>
+
+                                            <option
+                                                value="Shipped"
+                                                <%= order.orderStatus === "Shipped" ? "selected" : "" %>
+                                            >
+                                                Shipped
+                                            </option>
+
+                                            <option
+                                                value="Delivered"
+                                                <%= order.orderStatus === "Delivered" ? "selected" : "" %>
+                                            >
+                                                Delivered
+                                            </option>
+
+                                            <option
+                                                value="Cancelled"
+                                                <%= order.orderStatus === "Cancelled" ? "selected" : "" %>
+                                            >
+                                                Cancelled
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <button
+                                        type="submit"
+                                        class="px-7 py-3 bg-slate-950 text-white rounded-xl font-bold hover:bg-amber-500 hover:text-slate-950 transition"
+                                    >
+                                        Update Status
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                <% }) %>
+
+            </div>
+
+
+        <% } %>
+
+
+        <!-- BACK -->
+
+        <div class="mt-8">
+
+            <a
+                href="/admin"
+                class="text-sm font-bold text-slate-400 hover:text-amber-400 transition"
+            >
+                ← Back to Admin Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="border-t border-slate-800 mt-10">
+
+        <div class="max-w-7xl mx-auto px-6 py-7 text-center">
+
+            <p class="text-sm text-slate-500">
+                Ecommerce Store · Admin Panel
+            </p>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>
