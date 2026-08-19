@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-//creates a Schema object.
+// USER SCHEMA
 const userSchema = new mongoose.Schema(
   {
     name: {
@@ -26,6 +26,31 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ["user", "admin"],
       default: "user",
+    },
+
+    phone: {
+      type: String,
+      default: "",
+    },
+
+    address: {
+      type: String,
+      default: "",
+    },
+
+    city: {
+      type: String,
+      default: "",
+    },
+
+    state: {
+      type: String,
+      default: "",
+    },
+
+    pincode: {
+      type: String,
+      default: "",
     },
   },
   {
