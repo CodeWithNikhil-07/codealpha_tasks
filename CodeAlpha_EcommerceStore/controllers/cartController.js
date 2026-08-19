@@ -1,8 +1,6 @@
 const Cart = require("../models/Cart");
 const Product = require("../models/Product");
 
-// ADD PRODUCT TO CART
-
 const addToCart = async (req, res) => {
   try {
     const userId = req.session.userId;
@@ -20,19 +18,14 @@ const addToCart = async (req, res) => {
       return res.redirect(`/products/${productId}`);
     }
 
-    let cart = await Cart.findOne({
-      user: userId,
-    });
+    let cart = await Cart.findOne({ user: userId });
 
     if (!cart) {
-      cart = new Cart({
-        user: userId,
-        items: [],
-      });
+      cart = new Cart({ user: userId, items: [] });
     }
 
     const existingItem = cart.items.find(
-      (item) => item.product.toString() === productId,
+      (item) => item.product.toString() === productId
     );
 
     if (existingItem) {
@@ -52,32 +45,25 @@ const addToCart = async (req, res) => {
     await cart.save();
 
     req.flash("success", "Product added to cart");
-
     res.redirect("/cart");
   } catch (error) {
     console.error(error);
-
     req.flash("error", "Unable to add product to cart");
-
     res.redirect("/products");
   }
 };
-
-// VIEW CART
 
 const getCart = async (req, res) => {
   try {
     const userId = req.session.userId;
 
-    const cart = await Cart.findOne({
-      user: userId,
-    }).populate("items.product");
+    const cart = await Cart.findOne({ user: userId }).populate(
+      "items.product"
+    );
 
     if (!cart) {
       return res.render("cart/index", {
-        cart: {
-          items: [],
-        },
+        cart: { items: [] },
         subtotal: 0,
       });
     }
@@ -96,25 +82,17 @@ const getCart = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-
     req.flash("error", "Unable to load cart");
-
     res.redirect("/products");
   }
 };
-
-// ==========================================
-// INCREASE CART ITEM QUANTITY
-// ==========================================
 
 const increaseQuantity = async (req, res) => {
   try {
     const userId = req.session.userId;
     const productId = req.params.id;
 
-    const cart = await Cart.findOne({
-      user: userId,
-    });
+    const cart = await Cart.findOne({ user: userId });
 
     if (!cart) {
       req.flash("error", "Cart not found");
@@ -122,7 +100,7 @@ const increaseQuantity = async (req, res) => {
     }
 
     const cartItem = cart.items.find(
-      (item) => item.product.toString() === productId,
+      (item) => item.product.toString() === productId
     );
 
     if (!cartItem) {
@@ -137,7 +115,7 @@ const increaseQuantity = async (req, res) => {
       return res.redirect("/cart");
     }
 
-    // Don't allow quantity to exceed available stock
+    // Prevent quantity from exceeding stock.
     if (cartItem.quantity >= product.stock) {
       req.flash("error", "Maximum available stock reached");
       return res.redirect("/cart");
@@ -148,29 +126,20 @@ const increaseQuantity = async (req, res) => {
     await cart.save();
 
     req.flash("success", "Quantity increased");
-
     res.redirect("/cart");
   } catch (error) {
     console.error(error);
-
     req.flash("error", "Unable to increase quantity");
-
     res.redirect("/cart");
   }
 };
-
-// ==========================================
-// DECREASE CART ITEM QUANTITY
-// ==========================================
 
 const decreaseQuantity = async (req, res) => {
   try {
     const userId = req.session.userId;
     const productId = req.params.id;
 
-    const cart = await Cart.findOne({
-      user: userId,
-    });
+    const cart = await Cart.findOne({ user: userId });
 
     if (!cart) {
       req.flash("error", "Cart not found");
@@ -178,7 +147,7 @@ const decreaseQuantity = async (req, res) => {
     }
 
     const cartItem = cart.items.find(
-      (item) => item.product.toString() === productId,
+      (item) => item.product.toString() === productId
     );
 
     if (!cartItem) {
@@ -186,10 +155,10 @@ const decreaseQuantity = async (req, res) => {
       return res.redirect("/cart");
     }
 
-    // If quantity is 1, remove the item
+    // Remove the item when quantity reaches 1.
     if (cartItem.quantity === 1) {
       cart.items = cart.items.filter(
-        (item) => item.product.toString() !== productId,
+        (item) => item.product.toString() !== productId
       );
     } else {
       cartItem.quantity -= 1;
@@ -198,29 +167,20 @@ const decreaseQuantity = async (req, res) => {
     await cart.save();
 
     req.flash("success", "Quantity updated");
-
     res.redirect("/cart");
   } catch (error) {
     console.error(error);
-
     req.flash("error", "Unable to decrease quantity");
-
     res.redirect("/cart");
   }
 };
-
-// ==========================================
-// REMOVE ITEM FROM CART
-// ==========================================
 
 const removeFromCart = async (req, res) => {
   try {
     const userId = req.session.userId;
     const productId = req.params.id;
 
-    const cart = await Cart.findOne({
-      user: userId,
-    });
+    const cart = await Cart.findOne({ user: userId });
 
     if (!cart) {
       req.flash("error", "Cart not found");
@@ -228,19 +188,16 @@ const removeFromCart = async (req, res) => {
     }
 
     cart.items = cart.items.filter(
-      (item) => item.product.toString() !== productId,
+      (item) => item.product.toString() !== productId
     );
 
     await cart.save();
 
     req.flash("success", "Product removed from cart");
-
     res.redirect("/cart");
   } catch (error) {
     console.error(error);
-
     req.flash("error", "Unable to remove product");
-
     res.redirect("/cart");
   }
 };
