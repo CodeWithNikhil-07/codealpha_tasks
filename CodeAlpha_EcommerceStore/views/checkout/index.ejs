@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Checkout | Ecommerce Store</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-900">
+
+    <!-- CHECKOUT HEADER -->
+
+    <header class="bg-white border-b border-slate-200">
+
+        <div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+
+            <a
+                href="/products"
+                class="text-xl font-black tracking-tight text-slate-900"
+            >
+                ECOMMERCE<span class="text-indigo-600">.</span>
+            </a>
+
+            <div class="flex items-center gap-5 text-sm">
+
+                <a
+                    href="/products"
+                    class="text-slate-500 hover:text-indigo-600 transition"
+                >
+                    Shop
+                </a>
+
+                <a
+                    href="/cart"
+                    class="text-slate-500 hover:text-indigo-600 transition"
+                >
+                    Cart
+                </a>
+
+                <a
+                    href="/orders"
+                    class="text-slate-500 hover:text-indigo-600 transition"
+                >
+                    My Orders
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="max-w-6xl mx-auto px-6 py-10">
+
+        <!-- PAGE TITLE -->
+
+        <div class="mb-10">
+
+            <p class="text-sm font-semibold text-indigo-600 uppercase tracking-[0.2em]">
+                Secure Checkout
+            </p>
+
+            <h1 class="text-4xl font-black mt-2">
+                Complete Your Order
+            </h1>
+
+            <p class="text-slate-500 mt-2">
+                Enter your delivery details and review your order.
+            </p>
+
+        </div>
+
+
+        <form
+            action="/checkout/place-order"
+            method="POST"
+        >
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+
+                <!-- SHIPPING INFORMATION -->
+
+                <div class="lg:col-span-2">
+
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-7">
+
+                        <div class="flex items-center gap-4 mb-8">
+
+                            <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold">
+                                1
+                            </div>
+
+                            <div>
+
+                                <h2 class="text-xl font-bold">
+                                    Shipping Information
+                                </h2>
+
+                                <p class="text-sm text-slate-500">
+                                    Where should we deliver your order?
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- NAME + PHONE -->
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                            <div>
+
+                                <label
+                                    for="name"
+                                    class="block text-sm font-semibold mb-2"
+                                >
+                                    Full Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    required
+                                    placeholder="Enter your full name"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition"
+                                >
+
+                            </div>
+
+
+                            <div>
+
+                                <label
+                                    for="phone"
+                                    class="block text-sm font-semibold mb-2"
+                                >
+                                    Phone Number
+                                </label>
+
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    required
+                                    placeholder="Enter phone number"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- ADDRESS -->
+
+                        <div class="mt-5">
+
+                            <label
+                                for="address"
+                                class="block text-sm font-semibold mb-2"
+                            >
+                                Address
+                            </label>
+
+                            <textarea
+                                id="address"
+                                name="address"
+                                required
+                                rows="4"
+                                placeholder="House number, street, area..."
+                                class="w-full px-4 py-3 rounded-xl border border-slate-300 outline-none resize-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition"
+                            ></textarea>
+
+                        </div>
+
+
+                        <!-- CITY + STATE -->
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5">
+
+                            <div>
+
+                                <label
+                                    for="city"
+                                    class="block text-sm font-semibold mb-2"
+                                >
+                                    City
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="city"
+                                    name="city"
+                                    required
+                                    placeholder="Enter city"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition"
+                                >
+
+                            </div>
+
+
+                            <div>
+
+                                <label
+                                    for="state"
+                                    class="block text-sm font-semibold mb-2"
+                                >
+                                    State
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="state"
+                                    name="state"
+                                    required
+                                    placeholder="Enter state"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PINCODE -->
+
+                        <div class="mt-5">
+
+                            <label
+                                for="pincode"
+                                class="block text-sm font-semibold mb-2"
+                            >
+                                Pincode
+                            </label>
+
+                            <input
+                                type="text"
+                                id="pincode"
+                                name="pincode"
+                                required
+                                placeholder="Enter 6-digit pincode"
+                                class="w-full md:w-1/2 px-4 py-3 rounded-xl border border-slate-300 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 transition"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ORDER SUMMARY -->
+
+                <div>
+
+                    <div class="bg-slate-900 text-white rounded-2xl shadow-xl p-7 sticky top-6">
+
+                        <div class="flex items-center gap-4 mb-7">
+
+                            <div class="w-10 h-10 rounded-full bg-indigo-500 flex items-center justify-center font-bold">
+                                2
+                            </div>
+
+                            <div>
+
+                                <h2 class="text-xl font-bold">
+                                    Order Summary
+                                </h2>
+
+                                <p class="text-sm text-slate-400">
+                                    Review your items
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PRODUCTS -->
+
+                        <div class="space-y-5">
+
+                            <% cart.items.forEach(item => { %>
+
+                                <% if (item.product) { %>
+
+                                    <div class="border-b border-slate-700 pb-5">
+
+                                        <div class="flex justify-between gap-4">
+
+                                            <div>
+
+                                                <h3 class="font-semibold">
+                                                    <%= item.product.name %>
+                                                </h3>
+
+                                                <p class="text-sm text-slate-400 mt-1">
+                                                    ₹<%= item.product.price %>
+                                                    ×
+                                                    <%= item.quantity %>
+                                                </p>
+
+                                            </div>
+
+                                            <p class="font-semibold whitespace-nowrap">
+                                                ₹<%= item.product.price * item.quantity %>
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                <% } %>
+
+                            <% }) %>
+
+                        </div>
+
+
+                        <!-- PRICE DETAILS -->
+
+                        <div class="mt-6 space-y-4">
+
+                            <div class="flex justify-between text-slate-300">
+
+                                <span>
+                                    Subtotal
+                                </span>
+
+                                <span>
+                                    ₹<%= subtotal %>
+                                </span>
+
+                            </div>
+
+
+                            <div class="flex justify-between text-slate-300">
+
+                                <span>
+                                    Shipping
+                                </span>
+
+                                <span class="text-emerald-400 font-semibold">
+
+                                    <% if (shipping === 0) { %>
+
+                                        FREE
+
+                                    <% } else { %>
+
+                                        ₹<%= shipping %>
+
+                                    <% } %>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- TOTAL -->
+
+                        <div class="border-t border-slate-700 mt-6 pt-6">
+
+                            <div class="flex justify-between items-center">
+
+                                <span class="text-lg font-semibold">
+                                    Total
+                                </span>
+
+                                <span class="text-2xl font-black">
+                                    ₹<%= total %>
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PLACE ORDER -->
+
+                        <button
+                            type="submit"
+                            class="w-full mt-7 bg-indigo-600 hover:bg-indigo-500 text-white py-3.5 rounded-xl font-bold transition shadow-lg"
+                        >
+                            Place Order →
+                        </button>
+
+
+                        <p class="text-center text-xs text-slate-500 mt-4">
+                            🔒 Your order details are securely processed.
+                        </p>
+
+
+                        <!-- BACK TO CART -->
+
+                        <a
+                            href="/cart"
+                            class="block text-center text-slate-400 hover:text-white text-sm mt-5 transition"
+                        >
+                            ← Back to Cart
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </main>
+
+</body>
+
+</html>
